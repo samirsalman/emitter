@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from src.schedulers.schedulers import Scheduler
+from emitter.schedulers.schedulers import Scheduler
 
 
 def test_scheduler():

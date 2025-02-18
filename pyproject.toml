@@ -15,12 +15,9 @@ dependencies = [
 ]
 dynamic = ["version"]
 
-
-[tool.setuptools]
-packages = ["src"]
-
-[tool.setuptools.package-data]
-"src" = ["**/*.py"]
-
 [tool.setuptools.dynamic]
-version = {attr="src.__version__"}
+version = {attr="emitter.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["emitter*"]

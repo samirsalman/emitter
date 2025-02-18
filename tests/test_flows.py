@@ -1,5 +1,5 @@
-from src.emitters.emitters import AsyncEmitter, DebugEmitter, SyncEmitter
-from src.flows.manager import FlowManager
+from emitter.emitters.emitters import AsyncEmitter, DebugEmitter, SyncEmitter
+from emitter.flows.manager import FlowManager
 
 
 def test_flow_manager_sync():

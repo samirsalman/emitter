@@ -1,9 +1,8 @@
-import logging
-import time
 import random
-from src.emitters.emitters import SyncEmitter
-from src.events.events import event, EventCallback
-from src.flows.manager import FlowManager
+import time
+
+from emitter.events import EventCallback, event
+from emitter.flows.manager import FlowManager
 
 
 # Custom callbacks implementing EventCallback.
@@ -38,7 +37,15 @@ def print_hello_n_times(n: int):
 
 
 if __name__ == "__main__":
-    # Create a FlowManager instance using, 2, delay=5)
+    # Create a FlowManager instance using the default (SyncEmitter).
+    manager = FlowManager.create()
+
+    # Emit events immediately.
+    manager.emit("print_hello_n_times", 3)
+    manager.emit("count_loop", 0, 5)
+
+    # Schedule an event to run after 5 seconds.
+    scheduler_id = manager.schedule_emit("print_hello_n_times", 2, delay=5)
     print(f"Scheduled 'print_hello_n_times' event with ID: {scheduler_id}")
 
     # Schedule a periodic event (runs every 4 seconds after an initial 2-second delay).

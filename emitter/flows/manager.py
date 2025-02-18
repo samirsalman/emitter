@@ -1,10 +1,10 @@
 import asyncio
 import logging
 
-from src.emitters.emitters import AsyncEmitter, BaseEmitter, DebugEmitter, SyncEmitter
-from src.events.events import EventDescriptor
-from src.schedulers.schedulers import Scheduler
-from src.utils.logging import add_log_file, set_level
+from emitter.emitters.emitters import AsyncEmitter, BaseEmitter, DebugEmitter, SyncEmitter
+from emitter.events.events import EventDescriptor
+from emitter.schedulers.schedulers import Scheduler
+from emitter.utils.logging import add_log_file, set_level
 
 logger = logging.getLogger(__name__)
 

@@ -1,5 +1,5 @@
-from src.events import EventCallback, event
-from src.events.events import describe_event
+from emitter.events import EventCallback, event
+from emitter.events.events import describe_event
 
 
 class BeforeExample(EventCallback):

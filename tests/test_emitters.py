@@ -2,8 +2,8 @@ import asyncio
 
 import pytest
 
-from src.emitters.emitters import AsyncEmitter, DebugEmitter, SyncEmitter
-from src.events import EventCallback, event
+from emitter.emitters.emitters import AsyncEmitter, DebugEmitter, SyncEmitter
+from emitter.events import EventCallback, event
 
 
 class BeforeExample(EventCallback):

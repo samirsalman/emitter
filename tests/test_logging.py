@@ -1,6 +1,6 @@
 import logging
 
-from src.utils.logging import add_log_file, set_level
+from emitter.utils.logging import add_log_file, set_level
 
 
 def test_set_level():

@@ -1,8 +1,8 @@
-from abc import ABC, abstractmethod
 import asyncio
 import logging
+from abc import ABC, abstractmethod
 
-from src.events.events import async_emit, describe_event, emit
+from emitter.events.events import async_emit, describe_event, emit
 
 logger = logging.getLogger(__name__)
 

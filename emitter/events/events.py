@@ -1,6 +1,7 @@
-from src.events import Event, _EVENTS
 import asyncio
 from dataclasses import dataclass
+
+from emitter.events import _EVENTS, Event
 
 
 def emit(name: str, *args, **kwds):

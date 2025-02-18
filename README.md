@@ -39,12 +39,12 @@ See the example below or check out the [`example/main.py`](example/main.py) file
 ### Example
 
 ```python
-import logging
-import time
 import random
-from src.emitters.emitters import SyncEmitter
-from src.events.events import event, EventCallback
-from src.flows.manager import FlowManager
+import time
+
+from emitter.events import EventCallback, event
+from emitter.flows.manager import FlowManager
+
 
 # Custom callbacks implementing EventCallback.
 class BeforeExample(EventCallback):
@@ -52,10 +52,12 @@ class BeforeExample(EventCallback):
         print("Before Example")
         return True
 
+
 class AfterExample(EventCallback):
     def _run(self):
         print("After Example")
         return True
+
 
 # Attach before/after hooks to the function.
 @event(BeforeExample(), AfterExample())
@@ -65,6 +67,7 @@ def count_loop(start: int, end: int):
         time.sleep(random.random())
     return True
 
+
 # A simple event with automatically-wrapped callbacks.
 @event
 def print_hello_n_times(n: int):
@@ -72,6 +75,7 @@ def print_hello_n_times(n: int):
         print("Hello")
         time.sleep(random.random())
     return True
+
 
 if __name__ == "__main__":
     # Create a FlowManager instance using the default (SyncEmitter).
@@ -96,6 +100,7 @@ if __name__ == "__main__":
 
     # Allow time for any remaining scheduled events.
     time.sleep(5)
+
 ```
 
 ## Contributing

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "emitter"
+description = "A project for event emitters and schedulers"
+authors = [
+    { name = "Samir Salman", email = "samirsalman.dev@gmail.com" },
+]
+readme = "README.md"
+dependencies = [
+    "pytest==8.3.4",
+    "pytest-asyncio==0.25.3",
+]
+dynamic = ["version"]
+
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.package-data]
+"src" = ["**/*.py"]
+
+[tool.setuptools.dynamic]
+version = {attr="src.__version__"}

@@ -1,7 +1,7 @@
 import asyncio
+import logging
 import threading
 import uuid
-import logging
 
 logger = logging.getLogger(__name__)
 

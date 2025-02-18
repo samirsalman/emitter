@@ -1,5 +1,3 @@
-import pytest
-
 from src.emitters.emitters import AsyncEmitter, DebugEmitter, SyncEmitter
 from src.flows.manager import FlowManager
 

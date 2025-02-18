@@ -1,5 +1,3 @@
-import pytest
-
 from src.events import EventCallback, event
 from src.events.events import describe_event
 

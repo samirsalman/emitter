@@ -1,8 +1,7 @@
-from abc import ABC
 import asyncio
 import logging
 
-from src.emitters.emitters import AsyncEmitter, BaseEmitter, SyncEmitter, DebugEmitter
+from src.emitters.emitters import AsyncEmitter, BaseEmitter, DebugEmitter, SyncEmitter
 from src.events.events import EventDescriptor
 from src.schedulers.schedulers import Scheduler
 from src.utils.logging import add_log_file, set_level

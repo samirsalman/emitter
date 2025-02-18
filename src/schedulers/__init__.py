@@ -1,1 +1,1 @@
-from src.schedulers.schedulers import Scheduler, AsyncScheduledEvent
+from src.schedulers.schedulers import AsyncScheduledEvent, Scheduler

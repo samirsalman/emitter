@@ -1,7 +1,5 @@
 import logging
 
-import pytest
-
 from src.utils.logging import add_log_file, set_level
 
 

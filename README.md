@@ -26,6 +26,9 @@ Clone the repository and navigate to its directory:
 ```bash
 git clone https://github.com/samirsalman/emitter.git
 cd emitter
+
+# Install the package using pip.
+pip install .
 ```
 
 

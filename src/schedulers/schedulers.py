@@ -5,6 +5,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class AsyncScheduledEvent:
     def __init__(self, func, delay=0, interval=None, *args, loop=None, **kwargs):
         """
@@ -55,6 +56,7 @@ class AsyncScheduledEvent:
         if self.future:
             self.future.cancel()
 
+
 class Scheduler:
     def __init__(self):
         self.scheduled_events = {}
@@ -75,7 +77,9 @@ class Scheduler:
         Returns:
           - A unique event ID for cancellation.
         """
-        event = AsyncScheduledEvent(func, delay, interval, *args, loop=self._loop, **kwargs)
+        event = AsyncScheduledEvent(
+            func, delay, interval, *args, loop=self._loop, **kwargs
+        )
         self.scheduled_events[event.id] = event
         event.start()
         return event.id

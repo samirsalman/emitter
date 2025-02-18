@@ -1,22 +1,20 @@
 import logging
 import logging.handlers
 
+
 def set_level(
-        level: int = logging.DEBUG,
+    level: int = logging.DEBUG,
 ):
-    logging.basicConfig(
-        level=level,
-        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-    )
+    logging.getLogger().setLevel(level)
 
 
 def add_log_file(
-        level: int = logging.DEBUG,
-        dirpath: str = "logs",
-        file_prefix: str = "emitter",
+    level: int = logging.DEBUG,
+    dirpath: str = "logs",
+    file_prefix: str = "emitter",
 ):
-    import os
     import datetime
+    import os
 
     if not os.path.exists(dirpath):
         os.makedirs(dirpath)
@@ -32,8 +30,9 @@ def add_log_file(
     )
 
     handler.setLevel(level)
-    handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
+    handler.setFormatter(
+        logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    )
 
     logging.getLogger().addHandler(handler)
     logging.getLogger().info(f"Logging to: {filepath}")
-

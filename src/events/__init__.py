@@ -2,15 +2,25 @@ from abc import ABC, abstractmethod
 
 _EVENTS = []
 
+
 def _clean_args(args, kwds, fn):
     varnames = fn.__code__.co_varnames
-    varnames = [varname for varname in varnames if varname != "self" and varname != "cls"]
+    varnames = [
+        varname for varname in varnames if varname != "self" and varname != "cls"
+    ]
     args = args[: len(varnames)]
     kwds = {k: v for k, v in kwds.items() if k in varnames}
     return args, kwds
 
+
 class Event(ABC):
-    def __init__(self, name: str, callback: callable, before: "EventCallback" = None, after: "EventCallback" = None):
+    def __init__(
+        self,
+        name: str,
+        callback: callable,
+        before: "EventCallback" = None,
+        after: "EventCallback" = None,
+    ):
         self.name = name
         self.before = before or None
         self.after = after or None
@@ -33,6 +43,7 @@ class Event(ABC):
             else:
                 self.after(*args, **kwds)
 
+
 class EventCallback(ABC):
     @abstractmethod
     def _run(self, *args, **kwds):
@@ -42,6 +53,7 @@ class EventCallback(ABC):
         args, kwds = _clean_args(args, kwds, self._run)
         return self._run(*args, **kwds)
 
+
 def _wrap_event_callback(cb):
     """
     If cb does not have a _run attribute, wrap it in a simple EventCallback.
@@ -50,11 +62,14 @@ def _wrap_event_callback(cb):
         return None
     if hasattr(cb, "_run"):
         return cb  # Already an EventCallback instance.
+
     # Otherwise, wrap the callable in an EventCallback.
     class WrappedCallback(EventCallback):
         def _run(self, *args, **kwds):
             return cb(*args, **kwds)
+
     return WrappedCallback()
+
 
 def event(before: EventCallback = None, after: EventCallback = None):
 
@@ -63,7 +78,7 @@ def event(before: EventCallback = None, after: EventCallback = None):
         before = None
         after = None
         return event()(callback)
-    
+
     before = _wrap_event_callback(before)
     after = _wrap_event_callback(after)
 

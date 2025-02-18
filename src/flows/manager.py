@@ -7,10 +7,17 @@ from src.events.events import EventDescriptor
 from src.schedulers.schedulers import Scheduler
 from src.utils.logging import add_log_file, set_level
 
-logger = logging.getLogger(__name__)    
+logger = logging.getLogger(__name__)
+
 
 class FlowManager:
-    def __init__(self, emitter: BaseEmitter, log_level: int = logging.INFO, log_file: bool = False, log_file_prefix: str = None):
+    def __init__(
+        self,
+        emitter: BaseEmitter,
+        log_level: int = logging.INFO,
+        log_file: bool = False,
+        log_file_prefix: str = None,
+    ):
         self._emitter = emitter
         self._log_level = log_level
         self._log_file = log_file
@@ -28,11 +35,11 @@ class FlowManager:
     @property
     def emitter(self):
         return self._emitter
-    
+
     @property
     def events(self) -> list[EventDescriptor]:
         return self.emitter.events
-    
+
     @classmethod
     def create(cls, emitter: BaseEmitter = None, debug: bool = False):
         if debug:
@@ -41,7 +48,7 @@ class FlowManager:
             emitter = emitter or SyncEmitter()
 
         return cls(emitter)
-    
+
     def emit(self, name: str, *args, **kwargs):
         logger.info(f"Emitting: {name}")
         if isinstance(self.emitter, AsyncEmitter):
@@ -61,18 +68,20 @@ class FlowManager:
         """
         Schedule an event to be emitted after a delay.
         If 'interval' is provided, the event is emitted periodically.
-        
+
         Parameters:
           - name: The event name.
           - *args, **kwargs: Arguments passed to the event handler.
           - delay: Seconds to wait before emitting the event.
           - interval: If provided, the event is re-emitted every `interval` seconds.
-        
+
         Returns:
           - A unique scheduler ID for the scheduled event.
         """
+
         def _emit():
             self.emit(name, *args, **kwargs)
+
         return self.scheduler.schedule(_emit, delay=delay, interval=interval)
 
     def cancel_scheduled_emit(self, scheduled_id):

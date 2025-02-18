@@ -95,6 +95,7 @@ class AsyncEmitter(BaseEmitter):
 
         return self.async_emit(name, *args, **kwargs)
 
+
 class SyncEmitter(BaseEmitter):
 
     def before_emit(self, *args, **kwargs):
@@ -111,4 +112,3 @@ class DebugEmitter(BaseEmitter):
 
     def after_emit(self, *args, **kwargs):
         logger.debug("After Emit")
-

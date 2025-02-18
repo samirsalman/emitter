@@ -1,41 +1,3 @@
-# Emitter 🚀
-
-**Emitter** is a lightweight, event-driven Python library that simplifies managing execution flows. With its robust scheduler and event callbacks, you can attach pre- and post-execution logic seamlessly—ideal for logging, instrumentation, or any cross-cutting concerns.
-
-## Features ✨
-
-- **Event-Based Architecture:**  
-  Easily attach before/after hooks to your functions using the `@event` decorator.
-
-- **Flexible Callbacks:**  
-  Define custom callbacks by subclassing `EventCallback` or simply pass plain functions (they’ll be wrapped automatically).
-
-- **Non-Blocking Scheduling:**  
-  Schedule events to run after a delay or periodically without blocking the main thread. The scheduler runs on its own asynchronous event loop in a background thread.
-
-- **Synchronous & Asynchronous Support:**  
-  Use either `SyncEmitter` for blocking flows or `AsyncEmitter` for async flows.
-
-- **Flow Management:**  
-  Organize and manage your events using `FlowManager`.
-
-## Installation
-
-Clone the repository and navigate to its directory:
-
-```bash
-git clone https://github.com/samirsalman/emitter.git
-cd emitter
-```
-
-
-## Usage
-
-See the example below or check out the [`example/main.py`](example/main.py) file to learn how to use Emitter with immediate and scheduled events.
-
-### Example
-
-```python
 import logging
 import time
 import random
@@ -93,13 +55,3 @@ if __name__ == "__main__":
 
     # Allow time for any remaining scheduled events.
     time.sleep(5)
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to open an issue or submit a pull request.
-
-
-## Contact
-
-For inquiries or further information, visit the [GitHub profile of samirsalman](https://github.com/samirsalman).

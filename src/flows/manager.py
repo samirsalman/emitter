@@ -4,8 +4,8 @@ import logging
 
 from src.emitters.emitters import AsyncEmitter, BaseEmitter, SyncEmitter, DebugEmitter
 from src.events.events import EventDescriptor
+from src.schedulers.schedulers import Scheduler
 from src.utils.logging import add_log_file, set_level
-
 
 logger = logging.getLogger(__name__)    
 
@@ -14,6 +14,7 @@ class FlowManager:
         self._emitter = emitter
         self._log_level = log_level
         self._log_file = log_file
+        self.scheduler = Scheduler()
 
         set_level(level=self._log_level)
 
@@ -41,7 +42,6 @@ class FlowManager:
 
         return cls(emitter)
     
-    
     def emit(self, name: str, *args, **kwargs):
         logger.info(f"Emitting: {name}")
         if isinstance(self.emitter, AsyncEmitter):
@@ -56,6 +56,30 @@ class FlowManager:
         else:
             self.emitter.emit(name, *args, **kwargs)
         logger.info(f"Events: {self.emitter.events}")
-    
+
+    def schedule_emit(self, name: str, *args, delay=0, interval=None, **kwargs):
+        """
+        Schedule an event to be emitted after a delay.
+        If 'interval' is provided, the event is emitted periodically.
+        
+        Parameters:
+          - name: The event name.
+          - *args, **kwargs: Arguments passed to the event handler.
+          - delay: Seconds to wait before emitting the event.
+          - interval: If provided, the event is re-emitted every `interval` seconds.
+        
+        Returns:
+          - A unique scheduler ID for the scheduled event.
+        """
+        def _emit():
+            self.emit(name, *args, **kwargs)
+        return self.scheduler.schedule(_emit, delay=delay, interval=interval)
+
+    def cancel_scheduled_emit(self, scheduled_id):
+        """
+        Cancel a scheduled event using its unique scheduler ID.
+        """
+        self.scheduler.cancel(scheduled_id)
+
     def on_error(self, e):
         logger.error(f"Error: {e}")
